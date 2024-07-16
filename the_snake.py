@@ -27,7 +27,7 @@ APPLE_COLOR = (255, 0, 0)
 SNAKE_COLOR = (0, 255, 0)
 
 # Скорость движения змейки:
-SPEED = 5
+SPEED = 20
 
 # Настройка игрового окна:
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
@@ -94,6 +94,7 @@ class Snake(GameObject):
 
     @property
     def get_head_position(self):
+        """Функция, отвечающая за получение координат головы."""
         return self.positions[0]
 
     def draw(self):
@@ -120,20 +121,20 @@ class Snake(GameObject):
         move_value_y = self.direction[1] * 20
         head_position = self.get_head_position
         if head_position[0] < 0:
-            self.positions.insert(0, (
-                SCREEN_WIDTH + move_value_x, head_position[1] + move_value_y))
+            tail_cords = (SCREEN_WIDTH + move_value_x, head_position[1] + move_value_y)
+            self.positions.insert(0,  tail_cords)
         elif head_position[1] < 0:
-            self.positions.insert(0, (
-                head_position[0] + move_value_x, SCREEN_HEIGHT + move_value_y))
+            tail_cords = (head_position[0] + move_value_x, SCREEN_HEIGHT + move_value_y)
+            self.positions.insert(0, tail_cords)
         elif head_position[0] > SCREEN_WIDTH:
-            self.positions.insert(0, (
-                0, head_position[1] + move_value_y))
+            tail_cords = (0, head_position[1] + move_value_y)
+            self.positions.insert(0, tail_cords)
         elif head_position[1] > SCREEN_HEIGHT:
-            self.positions.insert(0, (
-                head_position[0] + move_value_x, 0))
+            tail_cords = (head_position[0] + move_value_x, 0)
+            self.positions.insert(0, tail_cords)
         else:
-            self.positions.insert(0, (
-                head_position[0] + move_value_x, head_position[1] + move_value_y))
+            tail_cords = (head_position[0] + move_value_x, head_position[1] + move_value_y)
+            self.positions.insert(0, tail_cords)
         self.positions.pop(-1)
 
     def reset(self):
@@ -164,6 +165,7 @@ def handle_keys(game_object):
 
 
 def main():
+    """Главная функция для запуска программы."""
     pygame.init()
     apple = Apple()
     snake = Snake()
@@ -177,8 +179,9 @@ def main():
 
         if apple.position == snake.positions[0]:
             apple.randomize_position()
-            snake.positions.append((snake.positions[-1][0] - snake.direction[0] * 20,
-                                    snake.positions[-1][1] - snake.direction[1] * 20))
+            tail_x = snake.positions[-1][0] - snake.direction[0] * 20
+            tail_y = snake.positions[-1][1] - snake.direction[1] * 20
+            snake.positions.append((tail_x, tail_y))
 
         if snake.positions[0] in snake.positions[1::]:
             snake.reset()
