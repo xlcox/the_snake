@@ -122,7 +122,7 @@ class Snake(GameObject):
         head_position = self.get_head_position
         if head_position[0] < 0:
             tail_cords = (SCREEN_WIDTH + move_value_x, head_position[1] + move_value_y)
-            self.positions.insert(0,  tail_cords)
+            self.positions.insert(0, tail_cords)
         elif head_position[1] < 0:
             tail_cords = (head_position[0] + move_value_x, SCREEN_HEIGHT + move_value_y)
             self.positions.insert(0, tail_cords)
