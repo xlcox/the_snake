@@ -69,7 +69,9 @@ class Apple(GameObject):
 
     def randomize_position(self) -> None:
         """Функция, отвечающая за изменение позиции."""
-        self.position = (choice(range(0, SCREEN_WIDTH, GRID_SIZE)), choice(range(0, SCREEN_HEIGHT, GRID_SIZE)))
+        random_x = choice(range(0, SCREEN_WIDTH, GRID_SIZE))
+        random_y = choice(range(0, SCREEN_HEIGHT, GRID_SIZE))
+        self.position = (random_x, random_y)
 
 
 class Snake(GameObject):
