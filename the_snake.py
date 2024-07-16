@@ -121,19 +121,24 @@ class Snake(GameObject):
         move_value_y = self.direction[1] * 20
         head_position = self.get_head_position
         if head_position[0] < 0:
-            tail_cords = (SCREEN_WIDTH + move_value_x, head_position[1] + move_value_y)
+            tail_cords = (SCREEN_WIDTH + move_value_x,
+                          head_position[1] + move_value_y)
             self.positions.insert(0, tail_cords)
         elif head_position[1] < 0:
-            tail_cords = (head_position[0] + move_value_x, SCREEN_HEIGHT + move_value_y)
+            tail_cords = (head_position[0] + move_value_x,
+                          SCREEN_HEIGHT + move_value_y)
             self.positions.insert(0, tail_cords)
         elif head_position[0] > SCREEN_WIDTH:
-            tail_cords = (0, head_position[1] + move_value_y)
+            tail_cords = (0,
+                          head_position[1] + move_value_y)
             self.positions.insert(0, tail_cords)
         elif head_position[1] > SCREEN_HEIGHT:
-            tail_cords = (head_position[0] + move_value_x, 0)
+            tail_cords = (head_position[0] + move_value_x,
+                          0)
             self.positions.insert(0, tail_cords)
         else:
-            tail_cords = (head_position[0] + move_value_x, head_position[1] + move_value_y)
+            tail_cords = (head_position[0] + move_value_x,
+                          head_position[1] + move_value_y)
             self.positions.insert(0, tail_cords)
         self.positions.pop(-1)
 
