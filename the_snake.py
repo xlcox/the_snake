@@ -136,12 +136,8 @@ class Snake(GameObject):
 
 def change_statistic(speed=SPEED, points=0):
     """Функция, отвечающая за изменение статистики окна."""
-    pg.display.set_caption(
-        'Змейка | Используйте ESC для выхода | Текущая скорость: ' +
-        str(speed) +
-        ' | Очки: ' +
-        str(points)
-    )
+    text = 'Змейка | Используйте ESC для выхода | Текущая скорость: '
+    pg.display.set_caption(text + str(speed) + ' | Очки: ' + str(points))
 
 
 def handle_keys(game_object):
