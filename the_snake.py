@@ -30,7 +30,7 @@ SPEED = 20
 
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
 screen.fill((112, 112, 118))
-pg.display.set_caption('Змейка | Используйте ESC для выхода | Текущая скорость: ' + str(SPEED) + ' | Очки: 0')
+
 clock = pg.time.Clock()
 
 
@@ -100,15 +100,21 @@ class Snake(GameObject):
         """Функция, отвечающая за отрисовку змейки и эффект движения."""
         self.fill_one_cell(self.get_head_position, self.body_color)
         if self.last:
-            self.fill_one_cell(self.last, BOARD_BACKGROUND_COLOR, BOARD_BACKGROUND_COLOR)
+            self.fill_one_cell(
+                self.last,
+                BOARD_BACKGROUND_COLOR,
+                BOARD_BACKGROUND_COLOR
+            )
 
     def move(self, increase=False):
         """Функция, отвечающая за движение змейки."""
         move_value_x = self.direction[0] * GRID_SIZE
         move_value_y = self.direction[1] * GRID_SIZE
         head_position_x, head_position_y = self.get_head_position
-        new_head_position_x = (head_position_x + move_value_x) % SCREEN_WIDTH
-        new_head_position_y = (head_position_y + move_value_y) % SCREEN_HEIGHT
+        new_head_position_x = ((head_position_x + move_value_x)
+                               % SCREEN_WIDTH)
+        new_head_position_y = ((head_position_y + move_value_y)
+                               % SCREEN_HEIGHT)
         new_head_position = (new_head_position_x, new_head_position_y)
         self.positions.insert(0, new_head_position)
         self.last = self.positions[-1]
@@ -148,7 +154,8 @@ def handle_keys(game_object):
             current_direction = game_object.direction
             key_pressed = event.key
             if (current_direction, key_pressed) in DIRECTION_MAP:
-                game_object.direction = DIRECTION_MAP[(current_direction, key_pressed)]
+                game_object.direction = DIRECTION_MAP[(current_direction,
+                                                       key_pressed)]
             if event.key == pg.K_ESCAPE:
                 pg.quit()
                 raise SystemExit
@@ -157,6 +164,7 @@ def handle_keys(game_object):
 def main():
     """Главная функция для запуска программы."""
     points = 0
+    change_statistic()
     pg.init()
     snake = Snake()
     apple = Apple()
