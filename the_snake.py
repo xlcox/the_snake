@@ -135,7 +135,8 @@ def handle_keys(game_object):
             raise SystemExit
         if event.type == pg.KEYDOWN:
             game_object.update_direction(
-                TURNS_WHEN_MOVING.get((game_object.direction, event.key), game_object.direction)
+                TURNS_WHEN_MOVING.get((game_object.direction, event.key),
+                                      game_object.direction)
             )
             if event.key == pg.K_ESCAPE:
                 pg.quit()
