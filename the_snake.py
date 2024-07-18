@@ -153,13 +153,13 @@ def main():
     while True:
         clock.tick(SPEED)
         handle_keys(snake)
-
         snake.move()
 
         if apple.position == snake.get_head_position():
             apple.randomize_position(snake.positions)
             points += 1
             show_info(points=points)
+            snake.positions.insert(0, snake.get_head_position())
         elif snake.get_head_position() in snake.positions[4::]:
             snake.reset()
             screen.fill(BOARD_BACKGROUND_COLOR)
